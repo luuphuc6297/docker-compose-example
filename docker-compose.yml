@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  product:
+    build: ./product
+    volumes:
+      - ./product:/usr/src/app
+    ports:
+      - 5050:8080
+  website:
+    image: nginx:1.25.2-alpine
+    volumes:
+      - ./website:/usr/share/nginx/html
+    ports:
+      - 5055:80
+    depends_on:
+      - product
